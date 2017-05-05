@@ -1,4 +1,6 @@
-appname := cell_automaton
+# -*- Makefile -*-
+
+appname := cellular_automaton
 
 CXX := g++
 CXXFLAGS := -Wall -g

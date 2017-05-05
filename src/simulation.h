@@ -1,37 +1,37 @@
 /****************************************************************************************
- @file: game.h
- @description: This file declares the Game class and it's content.
+ @file: simulation.h
+ @description: This file declares the Simulation class and it's content.
  @author: Victor Neville
  @date: 21/04/2017
 ****************************************************************************************/
 
-#ifndef __GAME_H__
-#define __GAME_H__
+#ifndef __SIMULATION_H__
+#define __SIMULATION_H__
 
 #include <list>
 #include "fish.h"
 #include "shark.h"
 #include "ocean.h"
 
-class Game
+class Simulation
 {
     public:
         /********************************************************************************
-         @name: Game
-         @description: constructor of Game object
+         @name: Simulation
+         @description: constructor of Simulation object
          @params:
          - int: length of ocean
          - int: width of ocean
          - int: the initial number of fishes
          - int: the initial number of fishes
         ********************************************************************************/ 
-        Game(int, int, int, int);
+        Simulation(int, int, int, int);
         
         /********************************************************************************
-         @name: ~Game
-         @description: destructor of Game object
+         @name: ~Simulation
+         @description: destructor of Simulation object
         ********************************************************************************/
-        virtual ~Game();
+        virtual ~Simulation();
 
         /********************************************************************************
          @name: get_num_animals
@@ -43,10 +43,10 @@ class Game
         void get_num_animals(int &, int &) const;
 
         /********************************************************************************
-         @name: simulate
+         @name: run
          @description: simulates one iteration of a cellular automaton
         ********************************************************************************/
-        void simulate();
+        void run();
 
         /********************************************************************************
          @name: print

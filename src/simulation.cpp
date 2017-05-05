@@ -1,19 +1,19 @@
 /****************************************************************************************
- @file: game.cpp
- @description: This file implements the Game class.
+ @file: simulation.cpp
+ @description: This file implements the Simulation class.
  @author: Victor Neville
  @date: 21/04/2017
 ****************************************************************************************/
 #include <iostream>
 #include "random.h"
-#include "game.h"
+#include "simulation.h"
 
 using namespace std;
 
 /****************************************************************************************
- Constructor of Game object.
+ Constructor of Simulation object.
 ****************************************************************************************/
-Game::Game(int length, int width, int num_fishes, int num_sharks)
+Simulation::Simulation(int length, int width, int num_fishes, int num_sharks)
 {   
     ocean = new Ocean<Animal*>(length, width);
     
@@ -28,9 +28,9 @@ Game::Game(int length, int width, int num_fishes, int num_sharks)
 }
 
 /****************************************************************************************
- Destructor of Game object.
+ Destructor of Simulation object.
 ****************************************************************************************/
-Game::~Game()
+Simulation::~Simulation()
 {
     list<Animal*>::iterator animal;
     
@@ -49,7 +49,7 @@ Game::~Game()
 /****************************************************************************************
  Getter of the number of animals.
 ****************************************************************************************/
-void Game::get_num_animals(int &num_fishes, int &num_sharks)  const
+void Simulation::get_num_animals(int &num_fishes, int &num_sharks)  const
 {
     num_fishes = fishes.size();
     num_sharks = sharks.size();
@@ -58,7 +58,7 @@ void Game::get_num_animals(int &num_fishes, int &num_sharks)  const
 /****************************************************************************************
  Adds a new animal of type Animal::animal_t.
 ****************************************************************************************/
-void Game::add_animal(Animal::animal_t type)
+void Simulation::add_animal(Animal::animal_t type)
 {
     int x_pos, y_pos;
     Animal *animal = NULL;
@@ -84,7 +84,7 @@ void Game::add_animal(Animal::animal_t type)
 /****************************************************************************************
  Manages the movement of an animal.
 ****************************************************************************************/
-void Game::move_animal(Animal &animal)
+void Simulation::move_animal(Animal &animal)
 {
     int x_pos, y_pos;
 
@@ -109,7 +109,7 @@ void Game::move_animal(Animal &animal)
 /****************************************************************************************
  Manages the elimination of a prey. 
 ****************************************************************************************/
-void Game::kill_prey(Animal &animal)
+void Simulation::kill_prey(Animal &animal)
 {
     /* only sharks can kill preys */
     if (animal.get_type() == Animal::TYPE_SHARK) {
@@ -142,7 +142,7 @@ void Game::kill_prey(Animal &animal)
 /****************************************************************************************
  Manages the birth of a new baby.
 ****************************************************************************************/
-void Game::give_birth(Animal &mother)
+void Simulation::give_birth(Animal &mother)
 {
     int x_pos, y_pos;
 
@@ -180,7 +180,7 @@ void Game::give_birth(Animal &mother)
 /****************************************************************************************
  Manages the evolution of the animals of type Animal::animal_t.
 ****************************************************************************************/
-void Game::evolve(Animal::animal_t type)
+void Simulation::evolve(Animal::animal_t type)
 {
     list<Animal*>::iterator iter;
     list<Animal*> *animals;
@@ -216,7 +216,7 @@ void Game::evolve(Animal::animal_t type)
 /****************************************************************************************
  Removes all dead animals of type Animal::animal_t.
 ****************************************************************************************/
-void Game::remove_dead(Animal::animal_t type)
+void Simulation::remove_dead(Animal::animal_t type)
 { 
     list<Animal*>::iterator iter;
     list<Animal*> *animals = NULL;
@@ -253,7 +253,7 @@ void Game::remove_dead(Animal::animal_t type)
 /****************************************************************************************
  Simulates one iteration of a cellular automaton.
 ****************************************************************************************/
-void Game::simulate()
+void Simulation::run()
 {
     /* manage animals evolution */
     evolve(Animal::TYPE_FISH);
@@ -267,7 +267,7 @@ void Game::simulate()
 /****************************************************************************************
  Prints the content of the ocean.
 ****************************************************************************************/
-void Game::print() const
+void Simulation::print() const
 {
     int length = ocean->get_length();
     int width = ocean->get_width();

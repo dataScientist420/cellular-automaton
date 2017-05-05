@@ -10,7 +10,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  
- @file: main.cpp
+ @file: cellular_automaton.cpp
  @description: This file is the entry point of the code. 
                The program implements a cellular automaton.
                Therefore, it simulates the evolution of 
@@ -20,7 +20,7 @@
  @author: Victor Neville
  @date: 19/04/2017
 ****************************************************************************************/
-#include "game.h"
+#include "simulation.h"
 #include <iostream>
 #include <unistd.h>
 
@@ -40,14 +40,14 @@ using namespace std;
 int main()
 {   
     int num_fishes, num_sharks, time_iter = 0;
-    Game game(OCEAN_LENGTH, OCEAN_WIDTH, INIT_NUM_FISHES, INIT_NUM_SHARKS);
+    Simulation sim(OCEAN_LENGTH, OCEAN_WIDTH, INIT_NUM_FISHES, INIT_NUM_SHARKS);
 
-    /* simulate until one of the animal species is dead or MAX_ITERATIONS is reached */
+    /* simulate until one of the animal species is dead or MAX_TIME is reached */
     do {
         system("clear");
-        game.simulate();
-        game.print();
-        game.get_num_animals(num_fishes, num_sharks);
+        sim.run();
+        sim.print();
+        sim.get_num_animals(num_fishes, num_sharks);
 
         cout << "time: " << ++time_iter << " sec, ";
         cout << "fishes: " << num_fishes << ", ";
